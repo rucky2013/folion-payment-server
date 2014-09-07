@@ -4,20 +4,50 @@ folion-payment-server
 Quick Start
 ------------
 
-Start up the ActiveMQ server and Couchbase server.
+1. Start up the ActiveMQ server and Couchbase server.
 
-Import the code as a maven project.
+2. Import the code as a maven project.
 
-Run the project as Java application with main class "ServerApplication"
+3. Run the project as Java application with main class "ServerApplication"
 
-Access this url from your browser: localhost:8080/paypal-express/checkout
+4. Access this url from your browser: localhost:8080/paypal-express/checkout
 
-Input the paypal sandbox account : paypal_buyer_usa_01@gmail.com/paypal_buyer_usa_01
+5. Input the paypal sandbox account : paypal_buyer_usa_01@gmail.com/paypal_buyer_usa_01
 
-Checkout the return response, and the Couchbase bucket "payment" for the successful transaction.
+6. Checkout the return response, and the Couchbase bucket "payment" for the successful transaction.
 
+Install
+------------
+configurate the properties in "application.xml" file
 
-Integraion
+#### PayPal Configuration
+```
+paypal.mode=sandbox
+paypal.serverUrl=https://api-3t.sandbox.paypal.com/2.0/
+paypal.redirectUrl=https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=
+paypal.username=
+paypal.password=
+paypal.signature=
+paypal.returnUrl=? (http://localhost:8080/paypal-express/return/)
+paypal.cancelUrl=? (http://localhost:8080/paypal-express/cancel/)
+paypal.notifyUrl=? (http://localhost:8080/paypal-express/notify/)
+```
+
+#### Couchbase Configuration
+```
+couchbase.servers=127.0.0.1
+couchbase.bucketName=payment
+couchbase.bucketPassword=payment
+```
+#### ActivMQ Configuration
+```
+activemq.broker-url=tcp://localhost:61616
+activemq.user=
+activemq.password=
+activemq.queue=queue.folion.payment
+```
+
+Integration
 ------------
 
 ### Prequisites
