@@ -9,7 +9,7 @@ import com.folionmedia.payment.server.config.ApplicationConfiguration;
 import com.folionmedia.payment.server.config.CouchbaseConfiguration;
 import com.folionmedia.payment.server.config.IntegraionConfiguration;
 
-//@EnableAutoConfiguration
+@EnableAutoConfiguration
 @Import({
 		PropertyPlaceholderAutoConfiguration.class,
 		ApplicationConfiguration.class,
