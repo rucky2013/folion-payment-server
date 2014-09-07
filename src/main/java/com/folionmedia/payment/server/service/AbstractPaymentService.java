@@ -61,4 +61,12 @@ public class AbstractPaymentService implements PaymentService {
 		return null;
 	}
 
+	@Override
+	public PaymentResponse cancelPaymentToTransaction(
+			PaymentRequest paymentRequest) throws PaymentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 }

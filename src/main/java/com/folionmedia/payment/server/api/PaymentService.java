@@ -18,5 +18,7 @@ public interface PaymentService {
 
 	PaymentResponse voidPayment(PaymentRequest paymentRequest) throws PaymentException;
 	
-	PaymentResponse applyPaymentToTransaction(PaymentRequest paymentRequest) throws PaymentException;	
+	PaymentResponse applyPaymentToTransaction(PaymentRequest paymentRequest) throws PaymentException;
+	
+	PaymentResponse cancelPaymentToTransaction(PaymentRequest paymentRequest) throws PaymentException;
 }

@@ -18,7 +18,6 @@ import com.folionmedia.payment.server.api.PaymentException;
 import com.folionmedia.payment.server.api.PaymentRequest;
 import com.folionmedia.payment.server.api.PaymentResponse;
 import com.folionmedia.payment.server.api.PaymentService;
-import com.folionmedia.payment.server.paypal.PaypalConstants;
 
 @Controller
 @RequestMapping("/paypal-express")
@@ -33,7 +32,7 @@ public class PaypalPaymentController {
     public String checkout(HttpServletRequest request)  throws PaymentException {
     	PaymentRequest paymentRequest = this.mockCreatePaymentRequest(request);
     	PaymentResponse paymentResponse = paymentService.requestHostedEndpoint(paymentRequest);
-    	return "redirect:" + paymentResponse.responseMap(PaypalConstants.REDIRECTURL); 
+    	return "redirect:" + paymentResponse.responseMap("REDIRECTURL"); 
     }
 	
     //Get http://localhost:8080/paypal-express/return/e66eb8ef-b10b-4083-8c34-c738c0aac571?token=EC-23S24751T2745551E&PayerID=M35ZNMM3R72Q2
@@ -48,6 +47,29 @@ public class PaypalPaymentController {
     	paymentRequest.setToken(token);
     	paymentRequest.setVendorPayerId(playId);
     	PaymentResponse paymentResponse = paymentService.applyPaymentToTransaction(paymentRequest);
+        return paymentResponse;
+    }
+    
+    //Get http://localhost:8080/paypal-express/cancel/492ed656-6acc-4491-b28a-ea4f6730e08a?token=EC-2BX80480XU771145W
+    @RequestMapping(value = "/cancel/{txId}", method = RequestMethod.GET)
+    @ResponseBody
+    public PaymentResponse cancelEndpoint(HttpServletRequest request, @PathVariable String txId, @RequestParam Map<String, String> requestParams)  throws PaymentException {
+    	String token = requestParams.get("token");
+    	
+    	PaymentRequest paymentRequest = new PaymentRequest();
+    	paymentRequest.setTxId(txId);
+    	paymentRequest.setToken(token);
+    	PaymentResponse paymentResponse = paymentService.cancelPaymentToTransaction(paymentRequest);
+        return paymentResponse;
+    }
+    
+    //Get http://localhost:8080/paypal-express/notify/492ed656-6acc-4491-b28a-ea4f6730e08a
+    @RequestMapping(value = "/notify/{txId}", method = RequestMethod.GET)
+    @ResponseBody
+    public PaymentResponse notifyEndpoint(HttpServletRequest request, @PathVariable String txId, @RequestParam Map<String, String> requestParams)  throws PaymentException {
+    	PaymentRequest paymentRequest = new PaymentRequest();
+    	paymentRequest.setTxId(txId);
+    	PaymentResponse paymentResponse = paymentService.cancelPaymentToTransaction(paymentRequest);
         return paymentResponse;
     }
 

@@ -29,10 +29,10 @@ import urn.ebay.apis.eBLBaseComponents.SetExpressCheckoutRequestDetailsType;
 
 import com.folionmedia.payment.server.api.PaymentRequest;
 import com.folionmedia.payment.server.api.PaymentResponse;
+import com.folionmedia.payment.server.api.PaymentTransactionState;
 import com.folionmedia.payment.server.api.PaymentType;
 import com.folionmedia.payment.server.api.PaymentVendorType;
 import com.folionmedia.payment.server.domain.PaymentTransaction;
-import com.folionmedia.payment.server.util.PaymentTransactionState;
 
 @Component
 public class PaypalPaymentSupport {
@@ -257,6 +257,9 @@ public class PaypalPaymentSupport {
 		paymentResponse.setCurrencyCode(paymentTransaction.getCurrencyCode());
 		
 		paymentResponse.setSuccessful(paymentTransaction.isSuccessful());
+		
+		paymentResponse.setVendorPayerId(paymentTransaction.getVendorPayerId());
+		paymentResponse.setVendorTxId(paymentTransaction.getVendorTxId());
 		
 		return paymentResponse;
 	}

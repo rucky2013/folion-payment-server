@@ -6,6 +6,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.couchbase.core.mapping.Document;
 import org.springframework.data.couchbase.core.mapping.Field;
 
+import com.folionmedia.payment.server.api.PaymentTransactionState;
+
 @Document
 public class PaymentTransaction {
 
@@ -28,12 +30,6 @@ public class PaymentTransaction {
 	private String uid;
 	
 	@Field
-	private String email = null;
-	
-	@Field
-	private String country = null;
-	
-	@Field
 	private String paymentType;
 	
 	@Field
@@ -41,6 +37,12 @@ public class PaymentTransaction {
 	
 	@Field
 	private String vendorPayerId;
+	
+	@Field
+	private String vendorPayerName = null;
+	
+	@Field
+	private String vendorPayerCountry = null;
 	
 	@Field
 	private String vendorTxId;
@@ -126,22 +128,6 @@ public class PaymentTransaction {
 		this.uid = uid;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
-	}
-
 	public String getVendorPayerId() {
 		return vendorPayerId;
 	}
@@ -208,7 +194,7 @@ public class PaymentTransaction {
 	}
 
 	public boolean isSuccessful(){
-		return true;
+		return state == PaymentTransactionState.COMPLETE.value();
 	}
 
 	public String getProductName() {
@@ -258,5 +244,22 @@ public class PaymentTransaction {
 	public void setPaymentType(String paymentType) {
 		this.paymentType = paymentType;
 	}
+
+	public String getVendorPayerCountry() {
+		return vendorPayerCountry;
+	}
+
+	public void setVendorPayerCountry(String vendorPayerCountry) {
+		this.vendorPayerCountry = vendorPayerCountry;
+	}
+
+	public String getVendorPayerName() {
+		return vendorPayerName;
+	}
+
+	public void setVendorPayerName(String vendorPayerName) {
+		this.vendorPayerName = vendorPayerName;
+	}
+	
 	
 }

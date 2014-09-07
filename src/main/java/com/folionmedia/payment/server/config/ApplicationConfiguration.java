@@ -11,7 +11,7 @@ import urn.ebay.api.PayPalAPI.PayPalAPIInterfaceServiceService;
 import com.folionmedia.payment.server.paypal.PaypalConfiguration;
 
 @Configuration
-@ComponentScan("com.folionmedia.payment.server.paypal")
+@ComponentScan("com.folionmedia.payment.server")
 @EnableConfigurationProperties(PaypalConfiguration.class)
 public class ApplicationConfiguration {
 
