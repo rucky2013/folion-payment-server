@@ -23,9 +23,6 @@
     <bean id="paymentService" class="org.springframework.jms.remoting.JmsInvokerServiceExporter">
         <property name="serviceInterface" value="com.folionmedia.payment.server.api.PaymentService"/>
         <property name="service" ref="paypalPaymentService"/>
-        <!-- 
-        <property name="messageConverter" ref="mappingJackson2MessageConverter" />
-         -->
     </bean>
 
     <bean class="org.springframework.jms.listener.SimpleMessageListenerContainer">
@@ -35,6 +32,4 @@
         <property name="messageListener" ref="paymentService"/>
     </bean>
 
-	<bean id="mappingJackson2MessageConverter"
-		class="org.springframework.jms.support.converter.MappingJackson2MessageConverter" />
 </beans>
