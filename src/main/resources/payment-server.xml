@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:int-jms="http://www.springframework.org/schema/integration/jms"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
+		http://www.springframework.org/schema/integration/jms http://www.springframework.org/schema/integration/jms/spring-integration-jms.xsd">
+
+	<!-- The gateway responsible for request/reply semantics
+	<int-jms:inbound-gateway request-channel="paymentRequestChannel" request-destination="requestQueue"/>
+	
+	<int:channel id="paymentRequestChannel" />
+
+	<int:chain input-channel="paymentRequestChannel">
+		<int:json-to-object-transformer type="com.folionmedia.payment.server.domain.PaymentTransaction"/>
+		<int:service-activator ref="paypalPaymentService" method="requestHostedEndpoint"/>
+		<int:object-to-json-transformer />
+	</int:chain>
+	 -->
+	 
+    <bean id="paymentService" class="org.springframework.jms.remoting.JmsInvokerServiceExporter">
+        <property name="serviceInterface" value="com.folionmedia.payment.server.api.PaymentService"/>
+        <property name="service" ref="paypalPaymentService"/>
+        <!-- 
+        <property name="messageConverter" ref="mappingJackson2MessageConverter" />
+         -->
+    </bean>
+
+    <bean class="org.springframework.jms.listener.SimpleMessageListenerContainer">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="destination" ref="requestQueue"/>
+        <property name="concurrentConsumers" value="3"/>
+        <property name="messageListener" ref="paymentService"/>
+    </bean>
+
+	<bean id="mappingJackson2MessageConverter"
+		class="org.springframework.jms.support.converter.MappingJackson2MessageConverter" />
+</beans>
