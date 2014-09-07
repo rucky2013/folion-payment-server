@@ -64,6 +64,7 @@ public class PaypalPaymentService extends AbstractPaymentService {
 		}
 		PaymentResponse paymentResponse = paypalPaymentSupport.build(paymentRequest, setExpressCheckoutResponseType);
 		if(paymentResponse.isSuccessful()){
+			paymentTransaction.setVendorToken(paymentResponse.getToken());
 			paymentTransaction = paymentTransactionRepository.save(paymentTransaction);
 		}
 		return paymentResponse;
@@ -167,13 +168,16 @@ public class PaypalPaymentService extends AbstractPaymentService {
 	@Override
 	public PaymentResponse cancelPaymentToTransaction(PaymentRequest paymentRequest) throws PaymentException {
 		PaymentTransaction paymentTransaction = paymentTransactionRepository.findOne(paymentRequest.getTxId());
-		if(!paymentTransaction.getVendorTxId().equals(paymentRequest.getToken())){
+		if(!paymentRequest.getToken().equals(paymentTransaction.getVendorToken())){
 			throw new PaymentException("Express Checkout Token Not Matched!");
+		}
+		if(PaymentTransactionState.get(paymentTransaction.getState()).isFinal()){
+			throw new PaymentException("Transaction State Already in Final");
 		}
 		paymentTransaction.setState(PaymentTransactionState.CANCELLED.value());
 		paymentTransactionRepository.save(paymentTransaction);
 		PaymentResponse paymentResponse = this.paypalPaymentSupport.copyCommonValue(paymentTransaction);
-		paymentResponse.setSuccessful(false);
+		paymentResponse.setSuccessful(paymentTransaction.isSuccessful());
 		return paymentResponse;
 	}
 	

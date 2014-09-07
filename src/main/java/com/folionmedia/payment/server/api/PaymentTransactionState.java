@@ -34,13 +34,26 @@ public enum PaymentTransactionState {
 	REVERSE(true, 8);
 
 	/** whether this payment state is a 'final' payment state */
-	public final boolean isFinal;
+	final boolean isFinal;
 	/* id corresponding to 'lk_transaction_state' table */
 	final int state;
 
 	PaymentTransactionState(boolean isFinal, int txStateId) {
 		this.isFinal = isFinal;
 		this.state = txStateId;
+	}
+	
+	public static PaymentTransactionState get(int txStateId){
+		for(PaymentTransactionState state : PaymentTransactionState.values()){
+			if(state.value() == txStateId){
+				return state;
+			}
+		}
+		throw new IllegalArgumentException("No Tx State Value " + txStateId);
+	}
+	
+	public boolean isFinal(){
+		return this.isFinal;
 	}
 
 	public int state() {

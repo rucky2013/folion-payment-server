@@ -36,6 +36,9 @@ public class PaymentTransaction {
 	private String vendorType;
 	
 	@Field
+	private String vendorToken;
+	
+	@Field
 	private String vendorPayerId;
 	
 	@Field
@@ -259,6 +262,14 @@ public class PaymentTransaction {
 
 	public void setVendorPayerName(String vendorPayerName) {
 		this.vendorPayerName = vendorPayerName;
+	}
+
+	public String getVendorToken() {
+		return vendorToken;
+	}
+
+	public void setVendorToken(String vendorToken) {
+		this.vendorToken = vendorToken;
 	}
 	
 	
