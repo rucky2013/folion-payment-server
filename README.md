@@ -92,5 +92,6 @@ Method "applyPaymentToTransaction" handles the paypay payment redirect url after
 
 Method "cancelPaymentToTransaction" handles the paypay payment redirect url after user cancel the payment on paypal.
 
+### Reference
 
-
+also see project [folion-payment-client](https://github.com/DeanWade/folion-payment-client) for client side implementation
