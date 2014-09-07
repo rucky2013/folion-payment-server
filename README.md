@@ -86,11 +86,11 @@ the core service interface is "PaymentService", it contains three methods to dea
 	
 	PaymentResponse cancelPaymentToTransaction(PaymentRequest paymentRequest) throws PaymentException;
 
-Method "requestHostedEndpoint" provides the redirect url to paypal payment page when user click "pay with paypal" button.
+Method `requestHostedEndpoint` provides the redirect url to paypal payment page when user click "pay with paypal" button.
 
-Method "applyPaymentToTransaction" handles the paypay payment redirect url after user successfully finish the payment on paypal, it will allow you to finalize the payment with paypal and process your own business logic on payment done.
+Method `applyPaymentToTransaction` handles the paypay payment redirect url after user successfully finish the payment on paypal, it will allow you to finalize the payment with paypal and process your own business logic on payment done.
 
-Method "cancelPaymentToTransaction" handles the paypay payment redirect url after user cancel the payment on paypal.
+Method `cancelPaymentToTransaction` handles the paypay payment redirect url after user cancel the payment on paypal.
 
 ### Reference
 
