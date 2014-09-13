@@ -10,7 +10,7 @@ Quick Start
 
 3. Run the project as Java application with main class "ServerApplication"
 
-4. Access this url from your browser: localhost:8080/paypal-express/checkout
+4. Access this url from your browser: http://localhost:8080/paypal-express/checkout
 
 5. Input the paypal sandbox account : paypal_buyer_usa_01@gmail.com/paypal_buyer_usa_01
 
@@ -18,7 +18,7 @@ Quick Start
 
 Install
 ------------
-configurate the properties in "application.xml" file
+configurate the properties in "application.properties" file
 
 #### PayPal Configuration
 ```
