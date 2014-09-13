@@ -10,9 +10,9 @@ Quick Start
 
 3. Run the project as Java application with main class "ServerApplication"
 
-4. Access this url from your browser: http://localhost:8080/paypal-express/checkout
+4. Access this url from your browser: [http://localhost:8080/paypal-express/checkout](http://localhost:8080/paypal-express/checkout)
 
-5. Input the paypal sandbox account : paypal_buyer_usa_01@gmail.com/paypal_buyer_usa_01
+5. Input the paypal sandbox account : `paypal_buyer_usa_01@gmail.com/paypal_buyer_usa_01`
 
 6. Checkout the return response, and the Couchbase bucket "payment" for the successful transaction.
 
